@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import PinKeypad from '$lib/components/PinKeypad.svelte';
 	import Input from '$lib/components/ui/Input.svelte';
 	import Button from '$lib/components/ui/Button.svelte';
@@ -9,6 +10,14 @@
 	let error = $state('');
 	let loading = $state(false);
 	let pinError = $state('');
+
+	onMount(() => {
+		const saved = localStorage.getItem('last_email');
+		if (saved) {
+			email = saved;
+			step = 'pin';
+		}
+	});
 
 	async function submitEmail(e: SubmitEvent) {
 		e.preventDefault();
@@ -28,6 +37,7 @@
 		if (data.error) {
 			error = data.error;
 		} else {
+			localStorage.setItem('last_email', email.trim().toLowerCase());
 			step = 'pin';
 		}
 	}
