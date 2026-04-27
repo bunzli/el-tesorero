@@ -1,7 +1,8 @@
 import type { PageServerLoad } from './$types.js';
 import { db } from '$lib/server/db/index.js';
-import { events, paymentReceipts, walletMovements } from '$lib/server/db/schema.js';
+import { events, paymentReceipts } from '$lib/server/db/schema.js';
 import { eq, and, sum } from 'drizzle-orm';
+import { installmentsDueByNow } from '$lib/utils/events.js';
 
 export const load: PageServerLoad = async ({ parent }) => {
 	const { member } = await parent();
@@ -9,7 +10,9 @@ export const load: PageServerLoad = async ({ parent }) => {
 	const activeEvents = db.select().from(events).where(eq(events.active, true)).all();
 
 	const debts = activeEvents.map((event) => {
-		const total = event.installmentAmountCents * event.numInstallments;
+		const dueInstallments = installmentsDueByNow(event);
+		const amountDueNow = event.installmentAmountCents * dueInstallments;
+		const totalAmount = event.installmentAmountCents * event.numInstallments;
 
 		const approved = db
 			.select({ total: sum(paymentReceipts.amountCents) })
@@ -30,9 +33,11 @@ export const load: PageServerLoad = async ({ parent }) => {
 			eventName: event.name,
 			installmentAmount: event.installmentAmountCents,
 			numInstallments: event.numInstallments,
-			total,
+			dueInstallments,
+			amountDueNow,
+			totalAmount,
 			paid,
-			remaining: Math.max(0, total - paid)
+			remaining: Math.max(0, amountDueNow - paid)
 		};
 	});
 

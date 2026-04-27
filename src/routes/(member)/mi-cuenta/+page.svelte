@@ -14,15 +14,15 @@
 	</div>
 
 	<!-- Deuda total -->
-	{#if data.debts.length > 0}
+	{#if data.totalDebt > 0}
 		<Card class="bg-gradient-to-r from-primary-600 to-primary-700 border-0 text-white">
-			<p class="text-sm opacity-80">Deuda total</p>
+			<p class="text-sm opacity-80">Deuda al día de hoy</p>
 			<p class="text-3xl font-bold mt-1">{formatCurrency(data.totalDebt)}</p>
 		</Card>
-	{:else}
+	{:else if data.debts.length > 0}
 		<Card class="bg-gradient-to-r from-success-500 to-success-600 border-0 text-white">
-			<p class="text-sm opacity-80">Estado</p>
-			<p class="text-xl font-bold mt-1">Sin deudas pendientes</p>
+			<p class="text-sm opacity-80">Estado al día de hoy</p>
+			<p class="text-xl font-bold mt-1">Al día — sin deudas pendientes</p>
 		</Card>
 	{/if}
 
@@ -33,20 +33,30 @@
 				<div>
 					<h3 class="font-semibold text-gray-800">{debt.eventName}</h3>
 					<p class="text-sm text-gray-500 mt-0.5">
-						{formatCurrency(debt.installmentAmount)} x {debt.numInstallments} cuotas
+						{formatCurrency(debt.installmentAmount)} × {debt.numInstallments} cuotas
 					</p>
+					{#if debt.dueInstallments < debt.numInstallments}
+						<p class="text-xs text-gray-400 mt-0.5">
+							Cuotas vencidas: {debt.dueInstallments} de {debt.numInstallments}
+						</p>
+					{/if}
 				</div>
 				<Badge variant={debt.remaining > 0 ? 'warning' : 'success'}>
-					{debt.remaining > 0 ? `Debe ${formatCurrency(debt.remaining)}` : 'Al día'}
+					{debt.remaining > 0 ? `Debes ${formatCurrency(debt.remaining)}` : 'Al día'}
 				</Badge>
 			</div>
 			<div class="mt-3 h-2 rounded-full bg-gray-100 overflow-hidden">
 				<div
 					class="h-full rounded-full bg-primary-500 transition-all"
-					style="width: {Math.min(100, (debt.paid / debt.total) * 100)}%"
+					style="width: {Math.min(100, debt.totalAmount > 0 ? (debt.paid / debt.totalAmount) * 100 : 0)}%"
 				></div>
 			</div>
-			<p class="mt-1 text-xs text-gray-400">{formatCurrency(debt.paid)} de {formatCurrency(debt.total)}</p>
+			<p class="mt-1 text-xs text-gray-400">
+				Pagado {formatCurrency(debt.paid)} de {formatCurrency(debt.totalAmount)} total
+				{#if debt.amountDueNow < debt.totalAmount}
+					<span class="text-primary-500">(vence hoy: {formatCurrency(debt.amountDueNow)})</span>
+				{/if}
+			</p>
 		</Card>
 	{/each}
 
