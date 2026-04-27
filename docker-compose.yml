@@ -1,0 +1,15 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./data:/app/data
+      - ./uploads:/app/uploads
+    environment:
+      - ADMIN_PIN=123456
+      - SESSION_SECRET=change-me-in-production
+      - DATABASE_URL=/app/data/tesorero.db
+      - UPLOAD_DIR=/app/uploads
+      - ORIGIN=http://localhost:3000
+    restart: unless-stopped
