@@ -66,7 +66,7 @@
 <div class="flex min-h-screen items-center justify-center bg-gradient-to-br from-primary-50 to-blue-50 p-4">
 	<div class="w-full max-w-sm">
 		<div class="mb-8 text-center">
-			<h1 class="text-3xl font-bold text-primary-700">El Tesorero</h1>
+			<h1 class="text-3xl font-bold text-primary-700">Tesorería G28</h1>
 			<p class="mt-1 text-sm text-gray-500">Tesorería del curso</p>
 		</div>
 

@@ -14,7 +14,7 @@
 	<!-- Top bar -->
 	<header class="sticky top-0 z-10 border-b border-gray-100 bg-white/80 backdrop-blur-md">
 		<div class="mx-auto flex max-w-lg items-center justify-between px-4 py-3">
-			<h1 class="text-lg font-bold text-primary-700">El Tesorero</h1>
+			<h1 class="text-lg font-bold text-primary-700">Tesorería G28</h1>
 			<span class="text-sm text-gray-500">{data.member.name}</span>
 		</div>
 	</header>
