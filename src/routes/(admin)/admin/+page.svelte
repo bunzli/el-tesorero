@@ -23,7 +23,7 @@
 			<p class="text-2xl font-bold text-warning-600 mt-1">{data.stats.pendingReceipts}</p>
 		</Card>
 		<Card>
-			<p class="text-sm text-gray-500">Saldo total monederos</p>
+			<p class="text-sm text-gray-500">Saldo total billeteras</p>
 			<p class="text-2xl font-bold text-success-600 mt-1">{formatCurrency(data.stats.totalBalance)}</p>
 		</Card>
 	</div>
@@ -43,7 +43,7 @@
 	{/if}
 
 	<!-- Wallets summary -->
-	<h3 class="text-lg font-semibold text-gray-800">Monederos</h3>
+	<h3 class="text-lg font-semibold text-gray-800">Billeteras</h3>
 	<div class="grid gap-4 sm:grid-cols-2">
 		{#each data.wallets as wallet}
 			<a href="/admin/monederos/{wallet.id}" class="block">

@@ -90,7 +90,7 @@
 
 <div class="space-y-6">
 	<div>
-		<a href="/admin/monederos" class="text-sm text-primary-600 hover:underline">← Monederos</a>
+		<a href="/admin/monederos" class="text-sm text-primary-600 hover:underline">← Billeteras</a>
 		<h2 class="text-2xl font-bold text-gray-800 mt-2">{data.wallet.name}</h2>
 	</div>
 

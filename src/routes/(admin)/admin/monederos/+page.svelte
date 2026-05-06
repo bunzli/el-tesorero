@@ -43,7 +43,7 @@
 
 <div class="space-y-6">
 	<div class="flex items-center justify-between">
-		<h2 class="text-2xl font-bold text-gray-800">Monederos</h2>
+		<h2 class="text-2xl font-bold text-gray-800">Billeteras</h2>
 		<Button onclick={() => showForm = !showForm}>
 			{showForm ? 'Cancelar' : '+ Nuevo monedero'}
 		</Button>
@@ -88,7 +88,7 @@
 
 	{#if data.wallets.length === 0}
 		<Card>
-			<p class="text-center text-sm text-gray-500 py-4">No hay monederos creados</p>
+			<p class="text-center text-sm text-gray-500 py-4">No hay billeteras creadas</p>
 		</Card>
 	{/if}
 </div>
