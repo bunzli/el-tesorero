@@ -8,7 +8,8 @@
 		{ href: '/admin/miembros', label: 'Miembros' },
 		{ href: '/admin/eventos', label: 'Eventos' },
 		{ href: '/admin/monederos', label: 'Monederos' },
-		{ href: '/admin/comprobantes', label: 'Comprobantes' }
+		{ href: '/admin/comprobantes', label: 'Comprobantes' },
+		{ href: '/admin/exportar', label: 'Exportar' }
 	];
 
 	function isActive(href: string, exact: boolean = false): boolean {
